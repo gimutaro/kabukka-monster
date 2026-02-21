@@ -33,14 +33,14 @@ export default function ResultScreen({ battleResult, recap, onReset }: ResultScr
                   fontSize: 13,
                   color: s.profit >= 0 ? 'var(--green)' : 'var(--red)'
                 }}>
-                  {s.profit >= 0 ? '+' : ''}{s.profit.toLocaleString()}円
+                  {s.profit >= 0 ? '+' : ''}{s.profit.toLocaleString()} JPY
                 </span>
               </div>
             ))}
             <div className="rs-total">
-              <span>合計損益</span>
+              <span>Total P&amp;L</span>
               <span className="rs-profit" style={{ color: side.total >= 0 ? 'var(--green)' : 'var(--red)' }}>
-                {side.total >= 0 ? '+' : ''}{side.total.toLocaleString()}円
+                {side.total >= 0 ? '+' : ''}{side.total.toLocaleString()} JPY
               </span>
             </div>
           </div>
@@ -54,11 +54,11 @@ export default function ResultScreen({ battleResult, recap, onReset }: ResultScr
         </div>
         {recap
           ? <p className="recap-text">{recap}</p>
-          : <p className="recap-loading">実況テキストを読み込み中...</p>
+          : <p className="recap-loading">Loading commentary...</p>
         }
       </div>
 
-      <button className="btn-retry" onClick={onReset}>もう一度バトル</button>
+      <button className="btn-retry" onClick={onReset}>Battle Again</button>
     </div>
   )
 }

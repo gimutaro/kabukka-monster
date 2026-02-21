@@ -78,7 +78,7 @@ export default function StockBattle() {
     } catch {
       commentary = {
         turns: result.turns.map(t => ({ turn: t.turn, comment: '' })),
-        final: '市場が激しく動いた今日のバトル。両者の戦略が激突し、最後まで目が離せない展開となった。',
+        final: 'An intense battle unfolded today. Both strategies clashed head-on, keeping everyone on the edge of their seats until the very end.',
       }
     }
 

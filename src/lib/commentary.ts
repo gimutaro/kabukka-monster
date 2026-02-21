@@ -2,38 +2,38 @@ import type { BattleResult, Commentary, Turn } from './types'
 
 function buildPrompt(result: BattleResult): string {
   const { turns, pTotal, cTotal, playerEvent, cpuEvent } = result
-  const winnerLabel = result.winner === 'player' ? 'プレイヤー' : result.winner === 'cpu' ? 'CPU' : '引き分け'
+  const winnerLabel = result.winner === 'player' ? 'Player' : result.winner === 'cpu' ? 'CPU' : 'Draw'
 
   const turnSummary = turns.map(t =>
     t.type === 'event'
-      ? `ターン${t.turn}(${t.actor === 'player' ? 'プレイヤー' : 'CPU'}): イベント「${t.card?.name}」発動`
-      : `ターン${t.turn}(${t.actor === 'player' ? 'プレイヤー' : 'CPU'}): ${t.stock?.name}を${t.sellPrice?.toLocaleString()}円で売却 損益${(t.profit ?? 0) >= 0 ? '+' : ''}${t.profit}円`
+      ? `Turn ${t.turn} (${t.actor === 'player' ? 'Player' : 'CPU'}): Event "${t.card?.name}" activated`
+      : `Turn ${t.turn} (${t.actor === 'player' ? 'Player' : 'CPU'}): Sold ${t.stock?.name} at ${t.sellPrice?.toLocaleString()} JPY, P&L: ${(t.profit ?? 0) >= 0 ? '+' : ''}${t.profit} JPY`
   ).join('\n')
 
-  return `あなたは日本の株式市場の熱血実況アナウンサーです。以下のバトルデータを元に、各ターンの実況コメントと最終総括をJSON形式で生成してください。
+  return `You are an excited stock market battle commentator. Based on the battle data below, generate a play-by-play commentary for each turn and a final summary in JSON format. Write everything in English.
 
-【バトルデータ】
-プレイヤーのイベント：${playerEvent.name}（${playerEvent.headline}）
-CPUのイベント：${cpuEvent.name}（${cpuEvent.headline}）
+[Battle Data]
+Player's Event: ${playerEvent.name} (${playerEvent.headline})
+CPU's Event: ${cpuEvent.name} (${cpuEvent.headline})
 ${turnSummary}
-プレイヤー合計損益：${pTotal >= 0 ? '+' : ''}${pTotal}円
-CPU合計損益：${cTotal >= 0 ? '+' : ''}${cTotal}円
-勝者：${winnerLabel}
+Player Total P&L: ${pTotal >= 0 ? '+' : ''}${pTotal} JPY
+CPU Total P&L: ${cTotal >= 0 ? '+' : ''}${cTotal} JPY
+Winner: ${winnerLabel}
 
-以下のJSONのみを返してください（前置き不要、コードブロック不要）:
+Return ONLY the following JSON (no preamble, no code blocks):
 {
   "turns": [
-    {"turn": 1, "comment": "ターン1の臨場感ある実況（30〜50字）"},
-    ...全ターン分
+    {"turn": 1, "comment": "Exciting commentary for turn 1 (20-40 words)"},
+    ...for all turns
   ],
-  "final": "最終総括（勝者宣言を含む100字程度の熱い締めくくり）"
+  "final": "Final summary declaring the winner (about 50 words, exciting closing)"
 }`
 }
 
 function fallbackCommentary(turns: readonly Turn[]): Commentary {
   return {
     turns: turns.map(t => ({ turn: t.turn, comment: '' })),
-    final: '激しいバトルが展開された。両者の戦略が激突し、最後まで目が離せない展開となった。',
+    final: 'An intense battle unfolded today. Both strategies clashed head-on, keeping everyone on the edge of their seats until the very end.',
   }
 }
 

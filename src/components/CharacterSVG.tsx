@@ -33,7 +33,7 @@ export default function CharacterSVG({ sector, flip = false, size = 120 }: Chara
         <rect x="62" y="128" width="10" height="12" rx="3" fill="#1a2a4a" stroke="#00e5a0" strokeWidth="1"/>
       </g>
     ),
-    '半導体': (
+    'Semiconductor': (
       <g>
         <rect x="34" y="30" width="52" height="52" rx="4" fill="#1a1a2e" stroke="#f5c542" strokeWidth="2"/>
         <rect x="40" y="36" width="40" height="40" rx="2" fill="#0d0d1a" stroke="#f5c542" strokeWidth="1"/>
@@ -59,7 +59,7 @@ export default function CharacterSVG({ sector, flip = false, size = 120 }: Chara
         <rect x="66" y="124" width="10" height="12" rx="3" fill="#1a1a2e" stroke="#f5c542" strokeWidth="1"/>
       </g>
     ),
-    'ゲーム': (
+    'Gaming': (
       <g>
         <ellipse cx="60" cy="55" rx="36" ry="26" fill="#16213e" stroke="#9b59b6" strokeWidth="2"/>
         <ellipse cx="60" cy="55" rx="30" ry="20" fill="#0d1929" stroke="#9b59b6" strokeWidth="1"/>
@@ -81,7 +81,7 @@ export default function CharacterSVG({ sector, flip = false, size = 120 }: Chara
         <rect x="66" y="116" width="12" height="14" rx="4" fill="#16213e" stroke="#9b59b6" strokeWidth="1"/>
       </g>
     ),
-    'ヘルスケア': (
+    'Healthcare': (
       <g>
         <ellipse cx="60" cy="50" rx="26" ry="26" fill="#1a2a2a" stroke="#2ecc71" strokeWidth="2"/>
         <rect x="55" y="36" width="10" height="28" rx="2" fill="#2ecc71"/>

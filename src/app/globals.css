@@ -70,6 +70,8 @@ body { background: var(--bg); }
   background: #0a0d14;
   border-bottom: 1px solid var(--border);
   padding: 7px 0;
+  position: relative;
+  z-index: 700;
 }
 .ticker-track {
   display: flex;
@@ -96,6 +98,8 @@ body { background: var(--bg); }
   border-bottom: 1px solid var(--border);
   background: rgba(14,17,23,.8);
   backdrop-filter: blur(8px);
+  position: relative;
+  z-index: 700;
 }
 .sb-logo {
   font-family: 'Bebas Neue', cursive;
@@ -165,7 +169,6 @@ body { background: var(--bg); }
   max-width: 860px;
   margin: 0 auto;
   padding: 32px 20px;
-  animation: fadeUp .5s ease;
 }
 .section-label {
   font-family: 'IBM Plex Mono', monospace;
@@ -677,6 +680,64 @@ body { background: var(--bg); }
   font-size: 10px;
   letter-spacing: 3px;
 }
+
+/* STORY MODAL */
+.story-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 600;
+  background: rgba(4,8,20,.97);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.story-modal {
+  width: min(480px, 90vw);
+  background: linear-gradient(145deg, #0d1929, #111e38);
+  border: 1px solid var(--green);
+  border-radius: 12px;
+  padding: 36px 32px;
+  box-shadow: 0 0 60px rgba(0,229,160,.15);
+}
+.story-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 5px;
+  color: var(--green);
+  margin-bottom: 24px;
+}
+.story-body {
+  font-size: 15px;
+  line-height: 2.2;
+  color: #c0cce8;
+  margin-bottom: 32px;
+}
+.story-body p {
+  margin-bottom: 12px;
+}
+.story-quote {
+  color: var(--yellow);
+  font-weight: 700;
+  font-size: 16px;
+  padding: 8px 0 8px 16px;
+  border-left: 3px solid var(--yellow);
+}
+.story-close {
+  display: block;
+  width: 100%;
+  background: var(--green);
+  color: #07080f;
+  border: none;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 900;
+  font-family: 'Noto Sans JP', sans-serif;
+  letter-spacing: 2px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.story-close:hover { box-shadow: 0 0 32px rgba(0,229,160,.35); }
 
 /* Character Arena Row */
 @keyframes sellCelebrate {

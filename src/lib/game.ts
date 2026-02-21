@@ -12,7 +12,7 @@ export function shuffle<T>(arr: readonly T[]): T[] {
 
 export function fmt(n: number): string {
   const sign = n >= 0 ? '+' : ''
-  return sign + n.toLocaleString('ja-JP') + '円'
+  return sign + n.toLocaleString('en-US') + ' JPY'
 }
 
 export function applyEvent(stocks: readonly BattleStock[], eventCard: EventCard): BattleStock[] {
@@ -51,7 +51,7 @@ export function simulateBattle(
     card: playerEvent,
     pStocks: pStocks.map(s => ({ ...s })),
     cStocks: cStocks.map(s => ({ ...s })),
-    action: `【${playerEvent.name}】発動 — ${playerEvent.headline}`,
+    action: `[${playerEvent.name}] activated — ${playerEvent.headline}`,
   })
 
   // Turn 2: CPU event
@@ -64,7 +64,7 @@ export function simulateBattle(
     card: cpuEvent,
     pStocks: pStocks.map(s => ({ ...s })),
     cStocks: cStocks.map(s => ({ ...s })),
-    action: `CPU【${cpuEvent.name}】発動 — ${cpuEvent.headline}`,
+    action: `CPU [${cpuEvent.name}] activated — ${cpuEvent.headline}`,
   })
 
   // Turn 3+: Sell phase
@@ -86,7 +86,7 @@ export function simulateBattle(
         profit,
         pStocks: pStocks.map(st => ({ ...st })),
         cStocks: cStocks.map(st => ({ ...st })),
-        action: `${s.name}を${s.currentPrice.toLocaleString()}円で売却`,
+        action: `Sold ${s.name} at ${s.currentPrice.toLocaleString()} JPY`,
       })
     }
     if (cOrder[i]) {
@@ -102,7 +102,7 @@ export function simulateBattle(
         profit,
         pStocks: pStocks.map(st => ({ ...st })),
         cStocks: cStocks.map(st => ({ ...st })),
-        action: `CPU ${s.name}を${s.currentPrice.toLocaleString()}円で売却`,
+        action: `CPU sold ${s.name} at ${s.currentPrice.toLocaleString()} JPY`,
       })
     }
   }

@@ -3,7 +3,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'KABUKKA MONSTER',
-  description: '株を育て、市場を制せ。株式バトルゲーム',
+  description: 'Raise your stocks. Conquer the market. A stock battle game.',
 }
 
 export default function RootLayout({
@@ -12,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ja">
+    <html lang="en">
       <body>{children}</body>
     </html>
   )

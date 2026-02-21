@@ -19,13 +19,28 @@ export default function DeckSelectScreen({
   onSelectEvent,
   onStartBattle,
 }: DeckSelectScreenProps) {
+  const [showStory, setShowStory] = useState(true)
   const [hoveredStockId, setHoveredStockId] = useState<number | null>(null)
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 })
 
   return (
     <div className="deck-screen">
+      {showStory && (
+        <div className="story-overlay" onClick={() => setShowStory(false)}>
+          <div className="story-modal" onClick={e => e.stopPropagation()}>
+            <div className="story-eyebrow">STORY</div>
+            <div className="story-body">
+              <p>At a company dinner, your coworker &mdash; &quot;Soma Kanzaki&quot; &mdash; said with a smug grin:</p>
+              <p className="story-quote">&quot;Wait, you&apos;re still just saving money? I already made more than my salary from stock trading.&quot;</p>
+              <p>You went home and started investing in stocks.</p>
+              <p>You&apos;ll out-earn him and make sure you never have to see that smug face again!</p>
+            </div>
+            <button className="story-close" onClick={() => setShowStory(false)}>Build Your Deck</button>
+          </div>
+        </div>
+      )}
       <div style={{ marginBottom: 32 }}>
-        <div className="section-label">STEP 1 -- 株を3枚選ぶ（{selectedStocks.length}/3）</div>
+        <div className="section-label">STEP 1 -- Pick 3 stocks ({selectedStocks.length}/3)</div>
         <div className="stock-grid">
           {STOCKS.map(s => (
             <div
@@ -45,14 +60,14 @@ export default function DeckSelectScreen({
               <div className="sp-ticker">{s.ticker}</div>
               <div className="sp-name">{s.name}</div>
               <div className="sp-sector">{s.sector}</div>
-              <div className="sp-price">{s.price.toLocaleString()}円</div>
+              <div className="sp-price">{s.price.toLocaleString()} JPY</div>
             </div>
           ))}
         </div>
       </div>
 
       <div style={{ marginBottom: 32 }}>
-        <div className="section-label">STEP 2 -- イベントカードを1枚選ぶ</div>
+        <div className="section-label">STEP 2 -- Pick 1 event card</div>
         <div className="event-grid">
           {EVENT_CARDS.map(c => (
             <div
@@ -75,7 +90,7 @@ export default function DeckSelectScreen({
         disabled={selectedStocks.length !== 3 || !selectedEvent}
         onClick={onStartBattle}
       >
-        バトル開始
+        START BATTLE
       </button>
 
       {hoveredStockId && (() => {

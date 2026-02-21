@@ -43,7 +43,7 @@ export default function BattleScreen({
               <div className="eoc-divider"/>
               <div className="eoc-headline">{eventOverlay.card.headline}</div>
               <div className="eoc-actor" style={{ color: eventOverlay.actor === 'player' ? 'var(--green)' : 'var(--red)' }}>
-                {eventOverlay.actor === 'player' ? 'PLAYER' : 'CPU'} が発動
+                {eventOverlay.actor === 'player' ? 'PLAYER' : 'CPU'} activated
               </div>
             </div>
           </div>
@@ -53,13 +53,13 @@ export default function BattleScreen({
       <div className="profit-race">
         <div className="race-bar-player">
           <span className="race-label" style={{ color: pCurrent >= 0 ? 'var(--green)' : 'var(--red)' }}>
-            {pCurrent >= 0 ? '+' : ''}{pCurrent.toLocaleString()}円
+            {pCurrent >= 0 ? '+' : ''}{pCurrent.toLocaleString()} JPY
           </span>
         </div>
         <div className="race-center">PROFIT RACE</div>
         <div className="race-bar-cpu">
           <span className="race-label" style={{ color: cCurrent >= 0 ? 'var(--red)' : 'var(--green)' }}>
-            {cCurrent >= 0 ? '+' : ''}{cCurrent.toLocaleString()}円
+            {cCurrent >= 0 ? '+' : ''}{cCurrent.toLocaleString()} JPY
           </span>
         </div>
       </div>
@@ -90,7 +90,7 @@ export default function BattleScreen({
                 </div>
                 {isSelling && (
                   <div className="cu-profit-burst" style={{ color: profit >= 0 ? 'var(--green)' : 'var(--red)' }}>
-                    {profit >= 0 ? '+' : ''}{profit.toLocaleString()}円
+                    {profit >= 0 ? '+' : ''}{profit.toLocaleString()} JPY
                   </div>
                 )}
               </div>
@@ -129,7 +129,7 @@ export default function BattleScreen({
                 </div>
                 {isSelling && (
                   <div className="cu-profit-burst" style={{ color: profit >= 0 ? 'var(--green)' : 'var(--red)' }}>
-                    {profit >= 0 ? '+' : ''}{profit.toLocaleString()}円
+                    {profit >= 0 ? '+' : ''}{profit.toLocaleString()} JPY
                   </div>
                 )}
               </div>
@@ -167,7 +167,7 @@ export default function BattleScreen({
               <div className="ti-action">{t.action}</div>
               {!isEvent && (
                 <div className="ti-profit" style={{ color: (t.profit ?? 0) >= 0 ? 'var(--green)' : 'var(--red)' }}>
-                  {(t.profit ?? 0) >= 0 ? '+' : ''}{(t.profit ?? 0).toLocaleString()}円
+                  {(t.profit ?? 0) >= 0 ? '+' : ''}{(t.profit ?? 0).toLocaleString()} JPY
                 </div>
               )}
             </div>
@@ -175,7 +175,7 @@ export default function BattleScreen({
         })}
         {visibleTurns.length === 0 && (
           <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: 11, color: 'var(--muted)', animation: 'pulse 1s infinite' }}>
-            -- バトル開始待機中 --
+            -- Waiting for battle to start --
           </div>
         )}
       </div>

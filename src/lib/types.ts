@@ -1,4 +1,4 @@
-export type Sector = 'SaaS' | '半導体' | 'ゲーム' | 'ヘルスケア' | 'AI/IT' | 'IT'
+export type Sector = 'SaaS' | 'Semiconductor' | 'Gaming' | 'Healthcare' | 'AI/IT' | 'IT'
 
 export type EventType = 'good' | 'bad' | 'neutral'
 
