@@ -1,10 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import { STOCKS, EVENT_CARDS } from '@/lib/data'
+import { EVENT_CARDS } from '@/lib/data'
 import type { Stock, EventCard } from '@/lib/types'
 
 interface DeckSelectScreenProps {
+  readonly stocks: readonly Stock[]
+  readonly pricesLoaded: boolean
   readonly selectedStocks: readonly Stock[]
   readonly selectedEvent: EventCard | null
   readonly onToggleStock: (stock: Stock) => void
@@ -13,6 +15,8 @@ interface DeckSelectScreenProps {
 }
 
 export default function DeckSelectScreen({
+  stocks,
+  pricesLoaded,
   selectedStocks,
   selectedEvent,
   onToggleStock,
@@ -40,9 +44,13 @@ export default function DeckSelectScreen({
         </div>
       )}
       <div style={{ marginBottom: 32 }}>
-        <div className="section-label">STEP 1 -- Pick 3 stocks ({selectedStocks.length}/3)</div>
+        <div className="section-label">
+          STEP 1 -- Pick 3 stocks ({selectedStocks.length}/3)
+          {!pricesLoaded && <span className="price-loading"> (fetching live prices...)</span>}
+          {pricesLoaded && <span className="price-live"> LIVE</span>}
+        </div>
         <div className="stock-grid">
-          {STOCKS.map(s => (
+          {stocks.map(s => (
             <div
               key={s.id}
               className={`stock-pick${selectedStocks.find(p => p.id === s.id) ? ' active' : ''}`}
@@ -94,7 +102,7 @@ export default function DeckSelectScreen({
       </button>
 
       {hoveredStockId && (() => {
-        const stock = STOCKS.find(s => s.id === hoveredStockId)
+        const stock = stocks.find(s => s.id === hoveredStockId)
         if (!stock) return null
         return (
           <div

@@ -13,8 +13,24 @@ import LoadingScreen from './LoadingScreen'
 import BattleScreen from './BattleScreen'
 import ResultScreen from './ResultScreen'
 
+async function fetchRealPrices(): Promise<Record<string, number>> {
+  const res = await fetch('/api/prices')
+  if (!res.ok) return {}
+  return res.json()
+}
+
+function applyRealPrices(stocks: readonly Stock[], prices: Record<string, number>): Stock[] {
+  return stocks.map(s => {
+    const realPrice = prices[String(s.id)]
+    if (realPrice) return { ...s, price: realPrice }
+    return { ...s }
+  })
+}
+
 export default function StockBattle() {
   const [phase, setPhase] = useState<GamePhase>('title')
+  const [liveStocks, setLiveStocks] = useState<Stock[]>([...STOCKS])
+  const [pricesLoaded, setPricesLoaded] = useState(false)
   const [selectedStocks, setSelectedStocks] = useState<Stock[]>([])
   const [selectedEvent, setSelectedEvent] = useState<EventCard | null>(null)
   const [battleResult, setBattleResult] = useState<BattleResult | null>(null)
@@ -26,6 +42,17 @@ export default function StockBattle() {
   const [arenaAnim, setArenaAnim] = useState<ArenaAnim>({ attacker: null, sell: null, event: false })
   const [eventOverlay, setEventOverlay] = useState<{ card: EventCard; actor: 'player' | 'cpu' } | null>(null)
   const [currentComment, setCurrentComment] = useState('')
+
+  useEffect(() => {
+    fetchRealPrices().then(prices => {
+      if (Object.keys(prices).length > 0) {
+        setLiveStocks(applyRealPrices(STOCKS, prices))
+      }
+      setPricesLoaded(true)
+    }).catch(() => {
+      setPricesLoaded(true)
+    })
+  }, [])
 
   useEffect(() => {
     if (phase !== 'battle' || !battleResult) return
@@ -48,7 +75,7 @@ export default function StockBattle() {
       }
 
       setTimeout(() => {
-        setVisibleTurns(prev => [t, ...prev])
+        setVisibleTurns(prev => [...prev, t])
         setCurrentPStocks([...t.pStocks])
         setCurrentCStocks([...t.cStocks])
         setCurrentTurnIdx(i => i + 1)
@@ -69,7 +96,7 @@ export default function StockBattle() {
     if (selectedStocks.length !== 3 || !selectedEvent) return
     setPhase('loading')
 
-    const cpuDeck = shuffle(STOCKS.filter(s => !selectedStocks.find(p => p.id === s.id))).slice(0, 3)
+    const cpuDeck = shuffle(liveStocks.filter(s => !selectedStocks.find(p => p.id === s.id))).slice(0, 3)
     const result = simulateBattle(selectedStocks, cpuDeck, selectedEvent)
 
     let commentary: Commentary = { turns: result.turns.map(t => ({ turn: t.turn, comment: '' })), final: '' }
@@ -95,7 +122,7 @@ export default function StockBattle() {
     setCurrentPStocks(selectedStocks.map(s => ({ ...s, currentPrice: s.price, sold: false, profit: 0 })))
     setCurrentCStocks(cpuDeck.map(s => ({ ...s, currentPrice: s.price, sold: false, profit: 0 })))
     setPhase('battle')
-  }, [selectedStocks, selectedEvent])
+  }, [selectedStocks, selectedEvent, liveStocks])
 
   const reset = useCallback(() => {
     setSelectedStocks([])
@@ -126,6 +153,8 @@ export default function StockBattle() {
 
         {phase === 'select' && (
           <DeckSelectScreen
+            stocks={liveStocks}
+            pricesLoaded={pricesLoaded}
             selectedStocks={selectedStocks}
             selectedEvent={selectedEvent}
             onToggleStock={toggleStock}
