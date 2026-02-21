@@ -106,6 +106,18 @@ export default function BattleScreen({
   cCurrent,
 }: BattleScreenProps) {
   const chatRef = useRef<HTMLDivElement>(null)
+  const bgmRef = useRef<HTMLAudioElement>(null)
+
+  useEffect(() => {
+    const audio = bgmRef.current
+    if (!audio) return
+    audio.volume = 0.5
+    audio.play().catch(() => {})
+    return () => {
+      audio.pause()
+      audio.currentTime = 0
+    }
+  }, [])
 
   useEffect(() => {
     if (chatRef.current) {
@@ -115,6 +127,7 @@ export default function BattleScreen({
 
   return (
     <div className="battle-screen">
+      <audio ref={bgmRef} src="/audio/battle-bgm.mp3" loop preload="auto" />
       {eventOverlay && (
         <div className="event-overlay">
           <div className="event-overlay-card">

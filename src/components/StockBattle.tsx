@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import type { Stock, EventCard, BattleResult, BattleStock, Turn, GamePhase, ArenaAnim, Commentary } from '@/lib/types'
 import { STOCKS } from '@/lib/data'
 import { shuffle, simulateBattle } from '@/lib/game'
@@ -42,6 +42,29 @@ export default function StockBattle() {
   const [arenaAnim, setArenaAnim] = useState<ArenaAnim>({ attacker: null, sell: null, event: false })
   const [eventOverlay, setEventOverlay] = useState<{ card: EventCard; actor: 'player' | 'cpu' } | null>(null)
   const [currentComment, setCurrentComment] = useState('')
+  const menuBgmRef = useRef<HTMLAudioElement | null>(null)
+
+  useEffect(() => {
+    const audio = new Audio('/audio/menu-bgm.mp3')
+    audio.loop = true
+    audio.volume = 0.4
+    menuBgmRef.current = audio
+    return () => {
+      audio.pause()
+      audio.currentTime = 0
+    }
+  }, [])
+
+  useEffect(() => {
+    const audio = menuBgmRef.current
+    if (!audio) return
+    if (phase === 'title' || phase === 'select') {
+      audio.play().catch(() => {})
+    } else {
+      audio.pause()
+      audio.currentTime = 0
+    }
+  }, [phase])
 
   useEffect(() => {
     fetchRealPrices().then(prices => {
@@ -65,6 +88,9 @@ export default function StockBattle() {
       setCurrentComment(t.comment || '')
 
       if (t.type === 'event') {
+        const se = new Audio('/audio/event-se.mp3')
+        se.volume = 0.6
+        se.play().catch(() => {})
         setEventOverlay({ card: t.card!, actor: t.actor })
         setArenaAnim({ attacker: null, sell: null, event: true })
         setTimeout(() => setEventOverlay(null), 2800)
