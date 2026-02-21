@@ -9,6 +9,7 @@ export interface Stock {
   readonly sector: Sector
   readonly price: number
   readonly desc: string
+  readonly image: string
 }
 
 export interface EventCard {

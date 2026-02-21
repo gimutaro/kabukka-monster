@@ -1,16 +1,16 @@
 import type { Stock, EventCard } from './types'
 
 export const STOCKS: readonly Stock[] = [
-  { id: 1, name: 'Freee', ticker: '4478', sector: 'SaaS', price: 1450, desc: 'Cloud accounting & HR SaaS for SMBs. No.1 market share in Japan. A fast-growing platform driving back-office DX.' },
-  { id: 2, name: 'MoneyForward', ticker: '3994', sector: 'SaaS', price: 3180, desc: 'From personal budgeting apps to corporate expense & accounting SaaS. A leading FinTech x SaaS company with 12M+ users.' },
-  { id: 3, name: 'Socionext', ticker: '6526', sector: 'Semiconductor', price: 2750, desc: 'Fabless SoC design company born from Fujitsu & Panasonic. High margins through a factory-free semiconductor model.' },
-  { id: 4, name: 'GENDA', ticker: '9166', sector: 'Gaming', price: 1230, desc: 'Entertainment company rapidly expanding arcade facilities through M&A. Leading the global claw machine market.' },
-  { id: 5, name: 'Medley', ticker: '4480', sector: 'Healthcare', price: 2080, desc: 'Healthcare DX company offering telemedicine, cloud solutions for clinics, and medical staffing services.' },
-  { id: 6, name: 'JMDC', ticker: '4483', sector: 'Healthcare', price: 2540, desc: 'Healthcare data company analyzing insurance & medical big data. Provides high-value analytics to pharma and insurers.' },
-  { id: 7, name: 'Kaonavi', ticker: '4435', sector: 'SaaS', price: 890, desc: 'Talent management SaaS with photo-based employee directory. Strong enterprise adoption in the HR tech market.' },
-  { id: 8, name: 'Appier', ticker: '4180', sector: 'AI/IT', price: 1670, desc: 'Taiwan-based AI company providing marketing automation SaaS. Rapidly growing ad-tech across Asia Pacific.' },
-  { id: 9, name: 'Safie', ticker: '4375', sector: 'AI/IT', price: 650, desc: 'Cloud-based video management platform. Aggregates security camera footage for AI-powered business insights.' },
-  { id: 10, name: 'VALTES', ticker: '4442', sector: 'IT', price: 780, desc: 'IT services company specializing in software testing & QA. Steady growth driven by rising demand for system quality.' },
+  { id: 1, name: 'Freee', ticker: '4478', sector: 'SaaS', price: 1450, desc: 'Cloud accounting & HR SaaS for SMBs. No.1 market share in Japan. A fast-growing platform driving back-office DX.', image: '/stocks/freee.png' },
+  { id: 2, name: 'MoneyForward', ticker: '3994', sector: 'SaaS', price: 3180, desc: 'From personal budgeting apps to corporate expense & accounting SaaS. A leading FinTech x SaaS company with 12M+ users.', image: '/stocks/moneyforward.png' },
+  { id: 3, name: 'Socionext', ticker: '6526', sector: 'Semiconductor', price: 2750, desc: 'Fabless SoC design company born from Fujitsu & Panasonic. High margins through a factory-free semiconductor model.', image: '/stocks/socionext.png' },
+  { id: 4, name: 'GENDA', ticker: '9166', sector: 'Gaming', price: 1230, desc: 'Entertainment company rapidly expanding arcade facilities through M&A. Leading the global claw machine market.', image: '/stocks/genda.png' },
+  { id: 5, name: 'Medley', ticker: '4480', sector: 'Healthcare', price: 2080, desc: 'Healthcare DX company offering telemedicine, cloud solutions for clinics, and medical staffing services.', image: '/stocks/medley.png' },
+  { id: 6, name: 'JMDC', ticker: '4483', sector: 'Healthcare', price: 2540, desc: 'Healthcare data company analyzing insurance & medical big data. Provides high-value analytics to pharma and insurers.', image: '/stocks/jmdc.png' },
+  { id: 7, name: 'Kaonavi', ticker: '4435', sector: 'SaaS', price: 890, desc: 'Talent management SaaS with photo-based employee directory. Strong enterprise adoption in the HR tech market.', image: '/stocks/kaonavi.png' },
+  { id: 8, name: 'Appier', ticker: '4180', sector: 'AI/IT', price: 1670, desc: 'Taiwan-based AI company providing marketing automation SaaS. Rapidly growing ad-tech across Asia Pacific.', image: '/stocks/appier.png' },
+  { id: 9, name: 'Safie', ticker: '4375', sector: 'AI/IT', price: 650, desc: 'Cloud-based video management platform. Aggregates security camera footage for AI-powered business insights.', image: '/stocks/safie.png' },
+  { id: 10, name: 'VALTES', ticker: '4442', sector: 'IT', price: 780, desc: 'IT services company specializing in software testing & QA. Steady growth driven by rising demand for system quality.', image: '/stocks/valtes.png' },
 ] as const
 
 export const EVENT_CARDS: readonly EventCard[] = [

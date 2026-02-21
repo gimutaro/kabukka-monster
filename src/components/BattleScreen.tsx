@@ -73,7 +73,7 @@ export default function BattleScreen({
             const isActive = !s.sold && !currentPStocks.slice(0, currentPStocks.indexOf(s)).some(x => !x.sold)
             const isSelling = arenaAnim.sell?.actor === 'player' && arenaAnim.sell?.stockId === s.id
             const profit = s.currentPrice - s.price
-            const szPx = isActive ? 86 : 58
+            const szPx = isActive ? 120 : 80
             return (
               <div key={s.id} className={[
                 'char-unit',
@@ -83,7 +83,7 @@ export default function BattleScreen({
                 arenaAnim.event && !s.sold ? 'cu-event' : '',
               ].filter(Boolean).join(' ')} style={{ position: 'relative' }}>
                 <div className="cu-svg">
-                  <CharacterSVG sector={s.sector} size={szPx}/>
+                  <CharacterSVG image={s.image} name={s.name} size={szPx}/>
                 </div>
                 <div className={`cu-name${isActive ? ' cu-active-label' : s.sold ? ' cu-sold-label' : ''}`}>
                   {s.name}
@@ -111,7 +111,7 @@ export default function BattleScreen({
             const isActive = !s.sold && !currentCStocks.slice(0, currentCStocks.indexOf(s)).some(x => !x.sold)
             const isSelling = arenaAnim.sell?.actor === 'cpu' && arenaAnim.sell?.stockId === s.id
             const profit = s.currentPrice - s.price
-            const szPx = isActive ? 86 : 58
+            const szPx = isActive ? 120 : 80
             return (
               <div key={s.id} className={[
                 'char-unit',
@@ -122,7 +122,7 @@ export default function BattleScreen({
                 arenaAnim.event && !s.sold ? 'cu-event' : '',
               ].filter(Boolean).join(' ')} style={{ position: 'relative' }}>
                 <div className="cu-svg">
-                  <CharacterSVG sector={s.sector} flip size={szPx}/>
+                  <CharacterSVG image={s.image} name={s.name} flip size={szPx}/>
                 </div>
                 <div className={`cu-name${isActive ? ' cu-active-label' : s.sold ? ' cu-sold-label' : ''}`}>
                   {s.name}
