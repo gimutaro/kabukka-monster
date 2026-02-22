@@ -1,4 +1,4 @@
-# KABUKKA MONSTER
+# KABUKKA MONSTER (KABUMON)
 
 **Raise your stocks. Conquer the market.**
 
